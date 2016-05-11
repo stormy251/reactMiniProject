@@ -1,20 +1,40 @@
 //  importing of dependencies
-import React from 'react';
+import React, { Component }from 'react';
 import ReactDOM from 'react-dom';
-import youtubeAPI from 'youtube-api-search';
+import YTSearch from 'youtube-api-search';
 
 // Importing components
 import SearchBar from './components/search_bar.js';
 
+// Data Section
 const API_KEY = "AIzaSyCwvvTsbaHiHAFi89AT6tVTWIrKXJkruAE";
 
-const App = () => {
-    return (
-        <div>
-            <h1>Building A Youtube Search Clone</h1>
-            <SearchBar />
-        </div>
-    );
+// Main Class Component
+class App extends Component{
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            videos:[]
+        };
+
+        YTSearch({ key:API_KEY,term:"Tennis"}, (videos) => {
+            // This is just to prepopulate videos on the page, with the default search term of tennis.
+            this.setState({videos})
+            // ***NOTE*** This is es6 syntactical sugar to that compiles to this.setState({videos:videos})
+            // This only works when the key and the value are the same names
+        });
+    }
+
+    render(){
+        return (
+            <div>
+                <h1>Building A Youtube Search Clone</h1>
+                <SearchBar />
+            </div>
+        );
+    }
 }
 
 ReactDOM.render(
