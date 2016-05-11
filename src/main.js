@@ -11,7 +11,7 @@ const API_KEY = "AIzaSyCwvvTsbaHiHAFi89AT6tVTWIrKXJkruAE";
 const App = () => {
     return (
         <div>
-            <h1>Test</h1>
+            <h1>Building A Youtube Search Clone</h1>
             <SearchBar />
         </div>
     );

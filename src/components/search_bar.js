@@ -4,11 +4,21 @@ class SearchBar extends Component {
 
     constructor(){
         super();
+
+        // This is the only time in which you should access state methods or variables directly, other times
+        // you should access the variables via the setState or getState methods.
+        this.state = {
+            term:''
+        }
     }
 
     render(){
         return (
-            <input onChange={(event) => console.log(event.target.value)} />
+            <div>
+                <input
+                value={this.state.term}
+                onChange={(event) => this.setState({term:event.target.value})} />
+            </div>
         );
     }
 
