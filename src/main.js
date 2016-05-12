@@ -21,7 +21,7 @@ class App extends Component{
 
         YTSearch({ key:API_KEY,term:"Tennis"}, (videos) => {
             // This is just to prepopulate videos on the page, with the default search term of tennis.
-            this.setState({videos})
+            this.setState({videos});
             // ***NOTE*** This is es6 syntactical sugar to that compiles to this.setState({videos:videos})
             // This only works when the key and the value are the same names
         });
