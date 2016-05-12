@@ -5,6 +5,7 @@ import YTSearch from 'youtube-api-search';
 
 // Importing components
 import SearchBar from './components/search_bar.js';
+import VideoList from './components/video_list';
 
 // Data Section
 const API_KEY = "AIzaSyCwvvTsbaHiHAFi89AT6tVTWIrKXJkruAE";
@@ -32,6 +33,7 @@ class App extends Component{
             <div>
                 <h1>Building A Youtube Search Clone</h1>
                 <SearchBar />
+                <VideoList videos={this.state.videos}/>
             </div>
         );
     }
