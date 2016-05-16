@@ -2,10 +2,10 @@
 import React, { Component }from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
+import _ from 'lodash';
 
 // Importing Styles
 require('./styles/main.scss');
-
 
 // Importing Components
 import SearchBar from './components/search_bar.js';
@@ -26,22 +26,29 @@ class App extends Component{
             selectedVideo:null
         };
 
-        YTSearch({ key:API_KEY,term:"Tennis"}, (videos) => {
+        this.videoSearch("tennis");
+
+    }
+
+    videoSearch(term){
+        YTSearch({ key:API_KEY,term:term}, (videos) => {
             // This is just to prepopulate videos on the page, with the default search term of tennis.
             this.setState({
                 videos:videos,
                 selectedVideo:videos[0]
             });
-            // ***NOTE*** This is es6 syntactical sugar to that compiles to this.setState({videos:videos})
-            // This only works when the key and the value are the same names
         });
     }
 
     render(){
+
+        // This method is a wrapper for the videoSearch method that ensures that searches aren't done more than 3 times in a second.
+        const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
+
         return (
             <div>
                 <div className="row header-padding">
-                    <SearchBar />
+                    <SearchBar onSearchTermChange={videoSearch} />
                 </div>
                 <div className="row">
                     <VideoDetail video={this.state.selectedVideo}/>
